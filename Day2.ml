@@ -27,6 +27,14 @@ let rec safe report =
            (if List.hd diff > 0 then fun x -> x > 0 else fun x -> x < 0)
            diff
 
+let rec safe_dampened report =
+  let rec range n = if n = 0 then [] else (n - 1) :: range (n - 1) in
+  safe report
+  || List.exists safe
+       (List.map
+          (fun i -> List.filteri (fun j _ -> i <> j) report)
+          (range (List.length report)))
+
 let () =
   (* Import the data *)
   print_endline "Where should I read the reports ? [stdin/<filename>]";
@@ -35,4 +43,5 @@ let () =
   in
 
   let reports = reports source in
-  print_int (List.length (List.filter safe reports))
+  print_int (List.length (List.filter safe reports));
+  print_int (List.length (List.filter safe_dampened reports))
