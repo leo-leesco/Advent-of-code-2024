@@ -11,6 +11,18 @@ Arguably the easiest way to do so is to call each self-contained program with :
 ocaml Day<n>.ml
 ```
 
+Special cases are listed below.
+
+### Day 3
+
+Pass the sequence of instructions directly as a parameter :
+```fish
+ocaml Day3.ml 'your commands'
+ocaml Day3.ml $(cat file | string collect)
+```
+
+Note the use of single quote to avoid variable interpolation (when using `fish`) and `string collect` to pass the actual content of `file` and not multiple lines (as there might be line breaks in the puzzle input).
+
 ## Examples of input
 
 ### Day 1
