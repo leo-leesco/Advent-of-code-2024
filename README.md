@@ -2,7 +2,7 @@
 
 While waiting for Christmas, [Advent of code](https://adventofcode.com) is a very nice series of mini-coding challenges. The idea is to do one per day.
 
-I will try to go as far as possible relying solely on OCaml to hone my functional programming skills, and if possible in [rhythm](https://www.youtube.com/watch?v=tZOdrbRKCrI) !
+I will try to go as far as possible relying solely on OCaml to hone my functional programming skills, and if possible in [rhythm](https://www.youtube.com/watch?v=tZOdrbRKCrI) ! There are some cases where I don't see a nice functional approach to solving the problem, in this case I will rely on Python.
 
 ## Usage of programs
 
@@ -23,6 +23,14 @@ ocaml Day3.ml $(cat file | string collect)
 
 Note the use of single quote to avoid variable interpolation (when using `fish`) and `string collect` to pass the actual content of `file` and not multiple lines (as there might be line breaks in the puzzle input).
 
+### Day 4
+
+The simplest way to execute the script on arbitrary input is to run the following command :
+```fish
+cat file - | python3 Day4.py
+```
+
+What this does is pipe the content of file to Python, then wait on `stdin` : you simply have to press `<Enter>` to make the program run, then `<Ctrl>-C` to exit `cat`.
 ## Examples of input
 
 ### Day 1
