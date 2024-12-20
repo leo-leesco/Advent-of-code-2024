@@ -26,11 +26,15 @@ Note the use of single quote to avoid variable interpolation (when using `fish`)
 ### Day 4
 
 The simplest way to execute the script on arbitrary input is to run the following command :
-```fish
-cat file - | python3 Day4.py
+```zsh
+(cat file ; echo) | python3 Day4.py
 ```
 
-What this does is pipe the content of file to Python, then wait on `stdin` : you simply have to press `<Enter>` to make the program run, then `<Ctrl>-C` to exit `cat`.
+In fish :
+```fish
+begin; cat file; echo; end | python3 Day4.py
+```
+
 ## Examples of input
 
 ### Day 1

@@ -38,5 +38,27 @@ def look_around(i, j):
     return c
 
 
+def look_X(i, j):
+    """this function looks at every character, checking whether it is an "A", then try to find two "MAS" intertwined
+    returns 0 if the conditions are not met, 1 if there are two "MAS" in X shape"""
+    if grid[i][j] != "A" or not (1 <= i < len(grid) - 1 and 1 <= j < len(grid[0])-1):
+        return 0
+    corners = [grid[i-1][j-1], grid[i+1][j-1], grid[i+1][j+1], grid[i-1][j+1]]
+
+    def transpose(corners: list[str]) -> list[str]:
+        """ABCD -> BCDA"""
+        return corners[1:]+[corners[0]]
+
+    def transpositions(corners: list[str]) -> list[list[str]]:
+        out = [corners]
+        for i in range(3):
+            out.append(transpose(out[-1]))
+        return out
+
+    return any(t == ["M", "M", "S", "S"] for t in transpositions(corners))
+
+
 print(sum(look_around(i, j) for i in range(len(grid))
+      for j in range(len(grid[0]))))
+print(sum(look_X(i, j) for i in range(len(grid))
       for j in range(len(grid[0]))))
