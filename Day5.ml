@@ -36,7 +36,29 @@ let rec count_valid rules updates =
       (if is_valid_update rules update then middle_value update else 0)
       + count_valid rules rest
 
-let rectify update = 0
+let rec rectified rules update =
+  if is_valid_update rules update then update
+  else
+    match update with
+    | [] -> []
+    | p :: rest -> (
+        match rectified rules rest with
+        | [] -> [ p ]
+        | n :: rest ->
+            if List.exists (fun rule -> rule = [ p; n ]) rules then
+              p :: rectified rules (n :: rest)
+            else n :: rectified rules (p :: rest))
+
+let rec count_rectified rules updates =
+  match updates with
+  | [] -> 0
+  | update :: rest ->
+      (if is_valid_update rules update then 0
+       else
+         let rect = rectified rules update in
+         (*print_endline (String.concat "," (List.map string_of_int rect));*)
+         middle_value rect)
+      + count_rectified rules rest
 
 let () =
   (* Import the data *)
@@ -48,4 +70,6 @@ let () =
   let rules = rules source in
   let updates = updates source in
 
-  print_int (count_valid rules updates)
+  print_int (count_valid rules updates);
+  print_newline ();
+  print_int (count_rectified rules updates)
