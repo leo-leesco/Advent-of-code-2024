@@ -6,6 +6,8 @@ I will try to go as far as possible relying solely on OCaml to hone my functiona
 
 ## Usage of programs
 
+### OCaml
+
 Arguably the easiest way to do so is to call each self-contained program with :
 ```shell
 ocaml Day<n>.ml
@@ -13,7 +15,7 @@ ocaml Day<n>.ml
 
 Special cases are listed below.
 
-### Day 3
+#### Day 3
 
 Pass the sequence of instructions directly as a parameter :
 ```fish
@@ -23,16 +25,16 @@ ocaml Day3.ml $(cat file | string collect)
 
 Note the use of single quote to avoid variable interpolation (when using `fish`) and `string collect` to pass the actual content of `file` and not multiple lines (as there might be line breaks in the puzzle input).
 
-### Day 4
+### Python
 
 The simplest way to execute the script on arbitrary input is to run the following command :
 ```zsh
-(cat file ; echo) | python3 Day4.py
+(cat file ; echo) | python3 Day<n>.py
 ```
 
 In fish :
 ```fish
-begin; cat file; echo; end | python3 Day4.py
+begin; cat file; echo; end | python3 Day<n>.py
 ```
 
 ## Examples of input
